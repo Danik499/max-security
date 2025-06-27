@@ -3,7 +3,7 @@ import axiosBaseQuery from "@/lib/axios";
 import { Country } from "@/types";
 
 export const countriesSlice = createApi({
-  reducerPath: "api",
+  reducerPath: "countriesApi",
   baseQuery: axiosBaseQuery({ baseUrl: "https://restcountries.com/v3.1" }),
   endpoints: (builder) => ({
     getCountries: builder.query<Country[], void>({

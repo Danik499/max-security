@@ -1,11 +1,13 @@
-"use client";
+import CompaniesList from "@/components/CompaniesList";
+import PageHeader from "@/components/PageHeader";
 
 export default function CompaniesPage() {
   return (
-    <div className="flex items-center justify-center min-h-screen gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] items-center sm:items-start">
-        <h1 className="text-2xl font-bold">Companies Page</h1>
-      </main>
+    <div>
+      <PageHeader />
+      <div className="flex flex-col gap-4 mt-8 px-[40px]">
+        <CompaniesList />
+      </div>
     </div>
   );
 }

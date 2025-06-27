@@ -33,7 +33,7 @@ export default function ResponsiveDrawer({ children }: Props) {
   }, []);
 
   const sidebarBase =
-    "flex bg-black text-white md:static md:translate-x-0 transition-transform ease-in-out duration-200 z-40 w-[300px] inset-y-0 left-0";
+    "flex bg-black text-white md:static md:translate-x-0 transition-transform ease-in-out duration-200 z-40 w-[260px] inset-y-0 left-0 overflow-hidden";
 
   const sidebarMobile = isOpen
     ? "translate-x-0 fixed"
@@ -46,11 +46,11 @@ export default function ResponsiveDrawer({ children }: Props) {
   return (
     <div className="flex h-screen overflow-hidden">
       <div
-        className={`${sidebarClasses} h-screen overflow-y-auto pb-[32px] pt-[14px] px-[24px]`}
+        className={`${sidebarClasses} h-screen overflow-y-auto pb-[32px] px-[24px]`}
       >
         <div className="flex flex-1 flex-col justify-between">
           <div>
-            <div className="flex gap-3 items-center border-b-1 border-b-[#FFFFFF30] pb-4">
+            <div className="flex gap-3 items-center border-b-1 border-b-[#FFFFFF30] h-[64px]">
               <Image src={Max} alt="max" />
               <Image src={ItsAToughWorld} alt="It's a tough world" />
             </div>
@@ -110,7 +110,7 @@ export default function ResponsiveDrawer({ children }: Props) {
           </button>
         </header>
 
-        <main className="flex-1 p-4">{children}</main>
+        <main className="flex-1">{children}</main>
       </div>
     </div>
   );

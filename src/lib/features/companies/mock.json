@@ -1,0 +1,26 @@
+[
+  {
+    "id": "mock-company-id",
+    "name": "Mock Company"
+  },
+  {
+    "id": "mock-company-id-2",
+    "name": "Mock Company 2"
+  },
+  {
+    "id": "mock-company-id-3",
+    "name": "Mock Company 3"
+  },
+  {
+    "id": "mock-company-id-4",
+    "name": "Mock Company 4"
+  },
+  {
+    "id": "mock-company-id-5",
+    "name": "Mock Company 5"
+  },
+  {
+    "id": "mock-company-id-6",
+    "name": "Mock Company 6"
+  }
+]

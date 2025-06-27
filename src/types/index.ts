@@ -10,3 +10,8 @@ export type Country = {
     official: string;
   };
 };
+
+export type Company = {
+  id: string;
+  name: string;
+};
