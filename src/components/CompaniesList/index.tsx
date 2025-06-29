@@ -16,7 +16,9 @@ export default function CompaniesList() {
         {data?.map((company) => (
           <div
             key={company.id}
-            onClick={() => router.push(`/companies/${company.id}`)}
+            onClick={() =>
+              router.push(`/companies/${company.id}/general-settings`)
+            }
             className="p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer"
           >
             <h2 className="text-xl font-semibold">{company.name}</h2>

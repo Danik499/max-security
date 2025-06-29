@@ -1,6 +1,3 @@
-import CompanySettingsTabs from "@/components/CompanySettingsTabs";
-import PageHeader from "@/components/PageHeader";
-
 interface Props {
   params: Promise<{
     companyId: string;
@@ -12,10 +9,7 @@ export default async function CompanyPage(props: Props) {
 
   return (
     <div>
-      <PageHeader breadcrumbs={[{ label: "Companies", href: "/companies" }]} />
       <div className="flex flex-col gap-4 mt-6 px-[40px]">
-        <CompanySettingsTabs />
-
         <h1 className="text-2xl font-bold mb-4">
           Company Details {params.companyId}
         </h1>
