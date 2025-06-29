@@ -2,7 +2,7 @@
 
 import { useGetCompaniesQuery } from "@/lib/features/companies";
 import { useRouter } from "next/navigation";
-import Loader from "../Loader";
+import Loader from "../../common/Loader";
 
 export default function CompaniesList() {
   const router = useRouter();

@@ -1,9 +1,22 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import companies from "./mock.json";
-import { Company } from "@/types";
+import { Company, Country } from "@/types";
+import {
+  GetCompaniesRequest,
+  GetCompanyByIdRequest,
+  SaveMembershipPlanRequest,
+} from "./mock";
 
-const mockBaseQuery = async () => {
-  return { data: companies };
+const mockBaseQuery = async (query: { url: string }) => {
+  if (query.url === "/") {
+    return await GetCompaniesRequest();
+  }
+
+  if (query.url.startsWith("/save-membership-plan")) {
+    return await SaveMembershipPlanRequest();
+  }
+
+  const companyId = query.url.split("/")[1];
+  return await GetCompanyByIdRequest(companyId);
 };
 
 export const companiesSlice = createApi({
@@ -13,7 +26,24 @@ export const companiesSlice = createApi({
     getCompanies: builder.query<Company[], void>({
       query: () => ({ url: `/` }),
     }),
+    getCompanyById: builder.query<Company, string>({
+      query: (id) => ({ url: `/${id}` }),
+    }),
+    saveMembershipPlan: builder.mutation<
+      { success: boolean },
+      { companyId: string; activeCountries: Country[] }
+    >({
+      query: (body) => ({
+        url: "/save-membership-plan",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetCompaniesQuery } = companiesSlice;
+export const {
+  useGetCompaniesQuery,
+  useGetCompanyByIdQuery,
+  useSaveMembershipPlanMutation,
+} = companiesSlice;

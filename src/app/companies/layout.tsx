@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <div className="h-full flex flex-col">
       <PageHeader />
-      <div className="flex-1 flex">{children}</div>
+      <div>{children}</div>
     </div>
   );
 }

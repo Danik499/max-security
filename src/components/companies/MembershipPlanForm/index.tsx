@@ -1,0 +1,67 @@
+"use client";
+import Button from "@/components/common/Button";
+import { FormProvider, useForm } from "react-hook-form";
+import CountriesTable from "../CountriesTable";
+import TypesTable from "../TypesTable";
+import { useGetCountriesQuery } from "@/lib/features/countries";
+import {
+  useGetCompanyByIdQuery,
+  useSaveMembershipPlanMutation,
+} from "@/lib/features/companies";
+import { Country } from "@/types";
+import { useEffect } from "react";
+
+type MembershipSettingsForm = {
+  activeCountries: Country[];
+};
+
+export default function MembershipPlanForm() {
+  const { data, isLoading } = useGetCountriesQuery();
+  const { data: company } = useGetCompanyByIdQuery("mock-company-id");
+  const [saveMembershipPlan] = useSaveMembershipPlanMutation();
+
+  const methods = useForm<MembershipSettingsForm>({
+    defaultValues: {
+      activeCountries: [],
+    },
+  });
+
+  useEffect(() => {
+    if (company) {
+      methods.reset({ activeCountries: company.activeCountries || [] });
+    }
+  }, [company]);
+
+  const onSubmit = (data: MembershipSettingsForm) => {
+    console.log("Form submitted with data:", data);
+    saveMembershipPlan({
+      companyId: "mock-company-id",
+      activeCountries: data.activeCountries,
+    });
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <FormProvider {...methods}>
+      <div className="flex flex-col gap-4 mt-6 ">
+        <div className="flex items-center justify-between">
+          <div className="text-[28px] font-bold">Plans</div>
+          <div>
+            <Button
+              title="Save membership plan"
+              onClick={methods.handleSubmit(onSubmit)}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-[32px] bg-[var(--warm-grey-50)] rounded-[12px] mt-[24px] grid grid-cols-[auto_218px]">
+        <CountriesTable data={data || []} />
+        <TypesTable />
+      </div>
+    </FormProvider>
+  );
+}

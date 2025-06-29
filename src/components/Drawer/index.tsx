@@ -9,7 +9,7 @@ import Max from "@/assets/max.svg";
 import ItsAToughWorld from "@/assets/its-a-tough-world.svg";
 import Logout from "@/assets/logout.svg";
 import User from "@/assets/user.svg";
-import Avatar from "../Avatar";
+import Avatar from "../common/Avatar";
 
 const navItems = [
   { name: "Companies", href: "/companies", icon: CompaniesIcon },

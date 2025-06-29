@@ -1,17 +1,14 @@
 export type Country = {
-  name: {
-    common: string;
-    nativeName: {
-      [key: string]: {
-        official: string;
-        common: string;
-      };
-    };
-    official: string;
-  };
+  name: string;
+};
+
+export type Region = {
+  name: string;
+  countries: Country[];
 };
 
 export type Company = {
   id: string;
   name: string;
+  activeCountries?: Country[];
 };

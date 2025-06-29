@@ -1,4 +1,4 @@
-import CompanySettingsTabs from "@/components/CompanySettingsTabs";
+import CompanySettingsTabs from "@/components/companies/CompanySettingsTabs";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

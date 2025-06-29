@@ -31,11 +31,7 @@ export default function PageHeader() {
   return (
     <div className="flex items-center w-full bg-[var(--warm-grey-100)] h-[64px] px-[34px]">
       <button onClick={router.back} className="p-1">
-        <Image
-          src={ArrowLeft}
-          alt="arrow left"
-          className-="w-[20px] h-[20px]"
-        />
+        <Image src={ArrowLeft} alt="arrow left" className="w-[20px] h-[20px]" />
       </button>
       <ol className="flex space-x-2">
         {breadcrumbItems.map((item, index) => (

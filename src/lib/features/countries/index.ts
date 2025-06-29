@@ -1,13 +1,17 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import axiosBaseQuery from "@/lib/axios";
-import { Country } from "@/types";
+import countries from "./mock.json";
+import { Region } from "@/types";
+
+const mockBaseQuery = async () => {
+  return { data: countries };
+};
 
 export const countriesSlice = createApi({
   reducerPath: "countriesApi",
-  baseQuery: axiosBaseQuery({ baseUrl: "https://restcountries.com/v3.1" }),
+  baseQuery: mockBaseQuery,
   endpoints: (builder) => ({
-    getCountries: builder.query<Country[], void>({
-      query: () => ({ url: `/all`, params: { fields: "name" }, method: "GET" }),
+    getCountries: builder.query<Region[], void>({
+      query: () => ({ url: `/` }),
     }),
   }),
 });
