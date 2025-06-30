@@ -20,6 +20,9 @@
   --warm-grey-50: #f8f7f2;
   --warm-grey-100: #eae9e6;
   --warm-grey-500: #908f89;
+  --warm-grey-700: #71706a;
+
+  --forest-moss: #5b7153;
 }
 
 @theme inline {

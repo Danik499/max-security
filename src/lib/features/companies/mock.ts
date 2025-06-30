@@ -9,6 +9,14 @@ const companies = [
       { name: "Japan" },
       { name: "South Korea" },
     ],
+    types: [
+      {
+        name: "Monthly",
+      },
+      {
+        name: "Daily",
+      },
+    ],
   },
   {
     id: "mock-company-id-2",
@@ -18,6 +26,7 @@ const companies = [
       { name: "Singapore" },
       { name: "Malaysia" },
     ],
+    types: [{ name: "Analytics" }, { name: "Elastic" }],
   },
   {
     id: "mock-company-id-3",

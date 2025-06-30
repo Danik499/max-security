@@ -13,6 +13,7 @@ import { useEffect } from "react";
 
 type MembershipSettingsForm = {
   activeCountries: Country[];
+  activeTypes: { name: string }[];
 };
 
 export default function MembershipPlanForm() {
@@ -23,14 +24,18 @@ export default function MembershipPlanForm() {
   const methods = useForm<MembershipSettingsForm>({
     defaultValues: {
       activeCountries: [],
+      activeTypes: [],
     },
   });
 
   useEffect(() => {
     if (company) {
-      methods.reset({ activeCountries: company.activeCountries || [] });
+      methods.reset({
+        activeCountries: company.activeCountries || [],
+        activeTypes: [],
+      });
     }
-  }, [company]);
+  }, [company, methods]);
 
   const onSubmit = (data: MembershipSettingsForm) => {
     console.log("Form submitted with data:", data);
@@ -58,9 +63,13 @@ export default function MembershipPlanForm() {
         </div>
       </div>
 
-      <div className="mb-[32px] bg-[var(--warm-grey-50)] rounded-[12px] mt-[24px] grid grid-cols-[auto_218px]">
-        <CountriesTable data={data || []} />
-        <TypesTable />
+      <div className="mb-[32px] bg-[var(--warm-grey-50)] rounded-[12px] mt-[24px] flex">
+        <div className="flex-1 min-w-0">
+          <CountriesTable data={data || []} />
+        </div>
+        <div className="flex-shrink-0 w-[218px]">
+          <TypesTable />
+        </div>
       </div>
     </FormProvider>
   );

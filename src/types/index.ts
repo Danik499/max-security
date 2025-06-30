@@ -11,4 +11,9 @@ export type Company = {
   id: string;
   name: string;
   activeCountries?: Country[];
+  types?: MembershipType[];
+};
+
+export type MembershipType = {
+  name: string;
 };

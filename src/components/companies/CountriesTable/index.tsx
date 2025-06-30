@@ -1,4 +1,5 @@
 "use client";
+import Checkbox from "@/components/common/Checkbox";
 import { Region, Country } from "@/types";
 import { useFormContext, Controller } from "react-hook-form";
 
@@ -7,11 +8,12 @@ interface Props {
 }
 
 export default function CountriesTable({ data }: Props) {
-  const { control, setValue, getValues } = useFormContext();
+  const { control, setValue, watch } = useFormContext();
+  const activeCountries = watch("activeCountries") || [];
 
   return (
-    <div className="bg-white rounded-[8px] border border-[var(--warm-grey-100)] m-[4px]">
-      <div className="flex items-center justify-between px-[24px] py-[14px] border-b border-b-[var(--warm-grey-100)]">
+    <div className="bg-white rounded-[8px] border border-[var(--warm-grey-100)] m-[4px] flex flex-col min-w-0">
+      <div className="flex items-center justify-between px-[24px] py-[14px] border-b border-b-[var(--warm-grey-100)] flex-shrink-0">
         <div className="text-base">Regions</div>
         <div
           className="text-sm underline cursor-pointer"
@@ -25,78 +27,88 @@ export default function CountriesTable({ data }: Props) {
           Select all
         </div>
       </div>
-      <div className={`h-[500px] grid grid-cols-5 gap-4 mx-[24px]`}>
-        {data?.map((region, index) => (
-          <div
-            key={index}
-            className="flex flex-col overflow-hidden border-r border-[var(--warm-grey-100)] my-[8px]"
-          >
-            <div className="overflow-y-auto">
-              <div className="flex px-[16px] py-[8px] text-sm gap-[10px] items-center">
-                <input
-                  type="checkbox"
-                  onChange={(state) => {
-                    const isChecked = state.target.checked;
-                    if (isChecked) {
-                      setValue("activeCountries", [
-                        ...getValues("activeCountries"),
-                        ...region.countries,
-                      ]);
-                    } else {
-                      setValue(
-                        "activeCountries",
-                        getValues("activeCountries").filter(
-                          (c: Country) =>
-                            !region.countries.find((rc) => rc.name === c.name)
-                        )
-                      );
-                    }
-                  }}
-                />
-                <span className="font-semibold">{region.name}</span>
-              </div>
-              {region.countries.map((country, countryIndex) => (
-                <div
-                  key={countryIndex}
-                  className="flex items-center gap-[10px] px-[16px] py-[8px] text-sm"
-                >
-                  <Controller
-                    control={control}
-                    name="activeCountries"
-                    render={({ field: { value, onChange } }) => {
-                      const checked = !!value.find(
+      <div className="overflow-x-auto flex-1">
+        <div className={`h-[500px] flex gap-4 mx-[24px] min-w-[800px]`}>
+          {data?.map((region, index) => (
+            <div
+              key={index}
+              className={`flex flex-col overflow-hidden my-[8px] min-w-[150px] flex-1 ${
+                index < data.length - 1
+                  ? "border-r border-[var(--warm-grey-100)]"
+                  : ""
+              }`}
+            >
+              <div className="flex flex-col h-full">
+                <div className="flex px-[16px] py-[8px] text-sm gap-[10px] items-center flex-shrink-0">
+                  <Checkbox
+                    checked={region.countries.every((country) =>
+                      activeCountries?.find(
                         (c: Country) => c.name === country.name
-                      );
-
-                      const handleChange = (
-                        e: React.ChangeEvent<HTMLInputElement>
-                      ) => {
-                        if (e.target.checked) {
-                          onChange([...value, country]);
-                        } else {
-                          onChange(
-                            value.filter(
-                              (c: Country) => c.name !== country.name
-                            )
-                          );
-                        }
-                      };
-
-                      return (
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={handleChange}
-                        />
-                      );
+                      )
+                    )}
+                    onChange={(isChecked) => {
+                      if (isChecked) {
+                        setValue("activeCountries", [
+                          ...activeCountries,
+                          ...region.countries,
+                        ]);
+                      } else {
+                        setValue(
+                          "activeCountries",
+                          activeCountries.filter(
+                            (c: Country) =>
+                              !region.countries.find((rc) => rc.name === c.name)
+                          )
+                        );
+                      }
                     }}
                   />
-                  <span>{country.name}</span>
+                  <span className="font-semibold">{region.name}</span>
                 </div>
-              ))}
+                <div className="overflow-y-auto flex-1">
+                  {region.countries.map((country, countryIndex) => (
+                    <div
+                      key={countryIndex}
+                      className="flex items-center gap-[10px] px-[16px] py-[8px] text-sm"
+                    >
+                      <Controller
+                        control={control}
+                        name="activeCountries"
+                        render={({ field: { value, onChange } }) => {
+                          const checked = !!value.find(
+                            (c: Country) => c.name === country.name
+                          );
+
+                          const handleChange = (isChecked: boolean) => {
+                            if (isChecked) {
+                              onChange([...value, country]);
+                            } else {
+                              onChange(
+                                value.filter(
+                                  (c: Country) => c.name !== country.name
+                                )
+                              );
+                            }
+                          };
+
+                          return (
+                            <Checkbox
+                              checked={checked}
+                              onChange={handleChange}
+                            />
+                          );
+                        }}
+                      />
+                      <span className="font-medium text-[var(--warm-grey-700)]">
+                        {country.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
