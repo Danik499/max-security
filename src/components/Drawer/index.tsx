@@ -50,11 +50,11 @@ export default function ResponsiveDrawer({ children }: Props) {
       >
         <div className="flex flex-1 flex-col justify-between">
           <div>
-            <div className="flex gap-3 items-center border-b-1 border-b-[#FFFFFF30] h-[64px]">
+            <div className="flex gap-1 items-center border-b-1 border-b-[#FFFFFF30] h-[64px]">
               <Image src={Max} alt="max" />
               <Image src={ItsAToughWorld} alt="It's a tough world" />
             </div>
-            <nav className="mt-8 flex gap-[6px] flex-col">
+            <nav className="mt-8 flex flex-col">
               {navItems.map((item) => {
                 const isActive = pathname.startsWith(item.href);
                 return (
@@ -67,7 +67,7 @@ export default function ResponsiveDrawer({ children }: Props) {
                       item.icon
                         ? () => <Image src={item.icon} alt="companies icon" />
                         : () => (
-                            <div className="w-4 h-4 rounded-xl bg-[#FFFFFF80]" />
+                            <div className="w-3 h-3 rounded-xl bg-[#FFFFFF80]" />
                           )
                     }
                   />
@@ -81,11 +81,13 @@ export default function ResponsiveDrawer({ children }: Props) {
                 <Avatar image={() => <Image src={User} alt="user" />} />
               </div>
               <div>
-                <div className="text-sm text-gray-400">Hello,</div>
-                <div className="text-white font-medium">Johnny Appleseed</div>
+                <div className="text-xs text-[var(--grey-400)]">Hello,</div>
+                <div className="text-white font-medium text-sm">
+                  Johnny Appleseed
+                </div>
               </div>
             </div>
-            <button className="w-full flex items-center gap-2 justify-start grey-bg grey-border text-grey rounded-[8px] px-4 py-3 text-sm font-medium">
+            <button className="bg-[var(--grey-100)] w-full flex items-center gap-2 justify-start grey-border text-[var(--grey-450)] rounded-[8px] px-4 py-3 text-sm font-medium cursor-pointer">
               <Image src={Logout} alt="logout" />
               Logout
             </button>
@@ -103,7 +105,7 @@ export default function ResponsiveDrawer({ children }: Props) {
       <div className="flex-1 flex flex-col overflow-y-auto">
         <header className="p-4 bg-gray-100 shadow md:hidden">
           <button
-            className="text-gray-800"
+            className="text-gray-800 text-2xl"
             onClick={() => setIsOpen((prev) => !prev)}
           >
             ☰

@@ -39,11 +39,11 @@ export default function TypesTable() {
         </div>
       </div>
       <div className="flex flex-col overflow-hidden border-r border-[var(--warm-grey-100)] min-w-[150px] flex-1">
-        <div className="overflow-y-auto h-[500px]">
+        <div className="overflow-y-auto h-[400px] pt-1">
           {types.map((type, index) => (
             <div
               key={index}
-              className="flex items-center gap-[10px] px-[16px] py-[8px] text-sm"
+              className="flex items-center gap-[10px] px-[16px] py-[5px] text-sm"
             >
               <Controller
                 control={control}

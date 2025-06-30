@@ -28,7 +28,7 @@ export default function CountriesTable({ data }: Props) {
         </div>
       </div>
       <div className="overflow-x-auto flex-1">
-        <div className={`h-[500px] flex gap-4 mx-[24px] min-w-[800px]`}>
+        <div className={`h-[400px] flex gap-4 mx-[24px] min-w-[800px]`}>
           {data?.map((region, index) => (
             <div
               key={index}
@@ -39,7 +39,7 @@ export default function CountriesTable({ data }: Props) {
               }`}
             >
               <div className="flex flex-col h-full">
-                <div className="flex px-[16px] py-[8px] text-sm gap-[10px] items-center flex-shrink-0">
+                <div className="flex py-[5px] text-sm gap-[10px] items-center flex-shrink-0">
                   <Checkbox
                     checked={region.countries.every((country) =>
                       activeCountries?.find(
@@ -69,7 +69,7 @@ export default function CountriesTable({ data }: Props) {
                   {region.countries.map((country, countryIndex) => (
                     <div
                       key={countryIndex}
-                      className="flex items-center gap-[10px] px-[16px] py-[8px] text-sm"
+                      className="flex items-center gap-[10px] py-[5px] text-sm"
                     >
                       <Controller
                         control={control}

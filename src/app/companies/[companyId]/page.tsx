@@ -1,22 +1,9 @@
-interface Props {
-  params: Promise<{
-    companyId: string;
-  }>;
+import { redirect } from "next/navigation";
+
+interface PageProps {
+  params: { companyId: string };
 }
 
-export default async function CompanyPage(props: Props) {
-  const params = await props.params;
-
-  return (
-    <div>
-      <div className="flex flex-col gap-4 mt-6 px-[40px]">
-        <h1 className="text-2xl font-bold mb-4">
-          Company Details {params.companyId}
-        </h1>
-        <p className="text-gray-600">
-          This is a placeholder for company details.
-        </p>
-      </div>
-    </div>
-  );
+export default function CompanyPage({ params }: PageProps) {
+  redirect(`/companies/${params.companyId}/general-settings`);
 }

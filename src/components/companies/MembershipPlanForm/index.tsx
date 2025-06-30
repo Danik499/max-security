@@ -68,7 +68,7 @@ export default function MembershipPlanForm() {
 
   return (
     <FormProvider {...methods}>
-      <div className="flex flex-col gap-4 mt-6 ">
+      <div className="flex flex-col gap-4 mt-[32px]">
         <div className="flex items-center justify-between">
           <div className="text-[28px] font-bold">Plans</div>
           <div>

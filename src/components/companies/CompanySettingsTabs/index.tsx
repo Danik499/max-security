@@ -3,17 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+export const tabs = [
+  { label: "General settings", href: "/general-settings" },
+  { label: "Membership settings", href: "/membership-settings" },
+  { label: "Users assignment", href: "/users-assignment" },
+  { label: "Cities management", href: "/cities-management" },
+  { label: "API management", href: "/api-management" },
+  { label: "Assets management", href: "/assets-management" },
+];
+
 export default function CompanySettingsTabs() {
   const pathname = usePathname();
-
-  const tabs = [
-    { label: "General settings", href: "/general-settings" },
-    { label: "Membership settings", href: "/membership-settings" },
-    { label: "Users assignment", href: "/users-assignment" },
-    { label: "Cities management", href: "/cities-management" },
-    { label: "API management", href: "/api-management" },
-    { label: "Assets management", href: "/assets-management" },
-  ];
 
   const handleTabClick = (href: string) => {
     const currentPath = pathname.split("/");
@@ -32,7 +32,7 @@ export default function CompanySettingsTabs() {
           <Link
             key={tab.href}
             href={handleTabClick(tab.href)}
-            className={`px-4 py-3 text-base font-medium ${
+            className={`mr-5 pb-3 text-base font-medium ${
               isActive
                 ? "text-black border-b-2 border-orange-500"
                 : "text-neutral-400"

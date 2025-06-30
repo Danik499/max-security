@@ -15,10 +15,10 @@ export default function SidebarButton({ icon, label, isActive, href }: Props) {
   return (
     <button
       onClick={() => router.push(href)}
-      className={`flex px-[14px] py-[12px] gap-[6px] items-center ${
+      className={`flex text-sm px-[14px] py-[12px] gap-[6px] items-center cursor-pointer ${
         isActive
-          ? "border border-[#FFFFFF14] rounded-lg grey-bg text-white"
-          : "text-gray-400"
+          ? "border border-[var(--grey-300)] rounded-lg text-white bg-[var(--grey-100)]"
+          : "text-gray-400 border border-transparent rounded-lg hover:border-[var(--grey-300)]"
       }`}
     >
       {icon && icon()}

@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function Button({ title, onClick, disabled }: Props) {
-  const disabledClass = disabled ? "bg-[var(--grey-300)]" : "bg-black";
+  const disabledClass = disabled ? "bg-[var(--grey-500)]" : "bg-black";
   return (
     <button
       onClick={onClick}
