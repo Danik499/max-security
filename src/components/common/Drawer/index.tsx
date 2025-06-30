@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import SidebarButton from "../SidebarButton";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import CompaniesIcon from "@/assets/companies.svg";
@@ -9,7 +8,8 @@ import Max from "@/assets/max.svg";
 import ItsAToughWorld from "@/assets/its-a-tough-world.svg";
 import Logout from "@/assets/logout.svg";
 import User from "@/assets/user.svg";
-import Avatar from "../common/Avatar";
+import Avatar from "../Avatar";
+import SidebarButton from "../SidebarButton";
 
 const navItems = [
   { name: "Companies", href: "/companies", icon: CompaniesIcon },
