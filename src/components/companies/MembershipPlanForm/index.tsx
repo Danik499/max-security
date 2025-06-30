@@ -10,6 +10,9 @@ import {
 } from "@/lib/features/companies";
 import { Country } from "@/types";
 import { useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import Loader from "@/components/common/Loader";
+import { useParams } from "next/navigation";
 
 type MembershipSettingsForm = {
   activeCountries: Country[];
@@ -17,9 +20,14 @@ type MembershipSettingsForm = {
 };
 
 export default function MembershipPlanForm() {
-  const { data, isLoading } = useGetCountriesQuery();
-  const { data: company } = useGetCompanyByIdQuery("mock-company-id");
-  const [saveMembershipPlan] = useSaveMembershipPlanMutation();
+  const params = useParams();
+  const companyId = params.companyId as string;
+
+  const { data, isLoading: countriesLoading } = useGetCountriesQuery();
+  const { data: company, isLoading: companyLoading } =
+    useGetCompanyByIdQuery(companyId);
+  const [saveMembershipPlan, { isSuccess, isLoading: isSaving }] =
+    useSaveMembershipPlanMutation();
 
   const methods = useForm<MembershipSettingsForm>({
     defaultValues: {
@@ -37,16 +45,25 @@ export default function MembershipPlanForm() {
     }
   }, [company, methods]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Settings saved successfully!", {
+        hideProgressBar: true,
+        autoClose: 3000,
+      });
+    }
+  }, [isSuccess]);
+
   const onSubmit = (data: MembershipSettingsForm) => {
     console.log("Form submitted with data:", data);
     saveMembershipPlan({
-      companyId: "mock-company-id",
+      companyId: companyId,
       activeCountries: data.activeCountries,
     });
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (countriesLoading || companyLoading) {
+    return <Loader />;
   }
 
   return (
@@ -56,6 +73,7 @@ export default function MembershipPlanForm() {
           <div className="text-[28px] font-bold">Plans</div>
           <div>
             <Button
+              disabled={isSaving}
               title="Save membership plan"
               onClick={methods.handleSubmit(onSubmit)}
             />
@@ -71,6 +89,7 @@ export default function MembershipPlanForm() {
           <TypesTable />
         </div>
       </div>
+      <ToastContainer />
     </FormProvider>
   );
 }
